@@ -1,0 +1,8 @@
+{
+    "env": {
+        "MONGO_PWD": "admin",
+        "MONGO_USR": "admin",
+        "PORT": "3001",
+        "JWT_KEY": "chave-privada"
+    }
+}
