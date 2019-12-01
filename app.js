@@ -12,6 +12,8 @@ mongoose.connect('mongodb+srv://' + process.env.MONGO_USR + ':' + process.env.MO
 
 //logs da aplicacao gerenciados pelo pacote morgan
 app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //Eliminando o CORS
 app.use((req, res, next) => {

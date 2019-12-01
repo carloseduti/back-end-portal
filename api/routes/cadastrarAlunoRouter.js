@@ -6,7 +6,7 @@ const Aluno = require('../models/alunoSchema');
 
 router.get('/:alunoId', (req, res, next) => {
     const id = req.params.alunoId;
-    aluno.findById(id)
+    Aluno.findById(id)
         .exec()
         .then(aluno => {
             res.status(200).json({
@@ -24,7 +24,7 @@ router.get('/:alunoId', (req, res, next) => {
 });
 router.get('/', (req, res, next) => {
     const aluno = {};
-    aluno.find({})
+    Aluno.find({})
         .exec()
         .then(cadastrarAluno => {
             res.status(200).json({
@@ -50,8 +50,8 @@ router.post('/', (req, res, next) => {
         nome: req.body.nome,
         cpf: req.body.cpf,
         email: req.body.email,
-        matricula: red.body.matricula,
-        tel: red.body.tel
+        matricula: req.body.matricula,
+        tel: req.body.tel
     });
     //promise
     console.log("antes de salvar o aluno", req.body.nome);
@@ -69,11 +69,19 @@ router.post('/', (req, res, next) => {
         });
 
 });
-router.put('/:produtoId', (req, res, next) => {
-    const id = req.params.produtoId;
+router.put('/:alunoId', (req, res, next) => {
+    const id = req.params.alunoId;
     console.log(req.body);
 
-    Produto.updateOne({ _id: id }, { $set: { nome: req.body.nome, preco: req.body.preco } })
+    Aluno.updateOne({ _id: id }, {
+            $set: {
+                nome: req.body.nome,
+                cpf: req.body.cpf,
+                email: req.body.email,
+                matricula: req.body.matricula,
+                tel: req.body.tel
+            }
+        })
         .exec()
         .then(result => {
             res.status(200).json(result);
@@ -85,10 +93,10 @@ router.put('/:produtoId', (req, res, next) => {
         });
 
 });
-router.delete('/:produtoId', (req, res, next) => {
-    const id = req.params.produtoId;
+router.delete('/:alunoId', (req, res, next) => {
+    const id = req.params.alunoId;
 
-    Produto.remove({ _id: id })
+    Aluno.remove({ _id: id })
         .then(result => {
             res.status(200).json(result);
         })
